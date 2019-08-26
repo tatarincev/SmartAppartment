@@ -1,5 +1,4 @@
-# Smart Apartment Date.
-## Back-end technical assessment.
+# Smart Apartment Date.Back-end technical assessment.
  
 This repository contains the technical assessment projects.
 
