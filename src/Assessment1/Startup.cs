@@ -39,7 +39,7 @@ namespace Assessment1
                 c.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
-                        Title = "OAuth2Integration Example",
+                        Title = "Pets store API. 1st Technical Assessment",
                         Version = "v1"
                     }
                 );

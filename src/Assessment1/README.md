@@ -25,3 +25,49 @@ And implements the following functional requirements:
     ```
 
 3. Go to `http://localhost:3000` in your web browser to view the website.
+
+
+# The project implementation flow:
+
+## Incoming functional Requirements that I need to implement in my assessment project:
+ - Support secure and unsecure end points through authorization/authentication 
+ - Ability to extend the API so it can interact with other APIs  
+ - Anything else you wish to incorporate. 
+
+## Incoming  Nonfunctional requirements:
+- Use Auth0 service for authorization and authentication. 
+
+For my project I built the  fictional Pet-Shop store with the Rest Web API that contains only two methods secure and insecure  and used  the follow stack of technologies for this:
+
+•	I chose the Implicit Grand Flow as main authorization flow because this is better suits for SPA application. I used Swagger UI in my project. 
+•	ASP.NET Core Web API as main host platform for pet-shop API as Resource server. 
+•	ASP.NET Core Swagger/UI for work with API through Web interface and for Authorization.
+•	(NSwag CLI)[https://github.com/RicoSuter/NSwag/wiki/CommandLine] CLI and public API https://petstore.swagger.io/ to meet the second functional requirement to interact with another API.
+
+## There are the main steps that I have done for this project. 
+
+### Auth0 prerequisites
+- I created the new application “Smart API“
+- Then registered the new API “Pets store API” with Audience http://localhost:3000 and authorized it to “Smart API” application
+- I added the two new permissions to the “Pets store API” that will be represents scopes resources that can be accessed on behalf of the user with a given access token.
+- Registered the two new Users and assigned them the unique permissions from recently defined.
+
+### Create API project
+-  Define the two API endpoints. 
+•	Open not required authorization GET /api/petstore/ info that will returns information for current store  
+•	authorized POST /api/petstore/pets/search that will be allows to search the pets by given criteria. 
+•	The users who have permission “pets:read:any” are allowed to search pets with any statuses instead of users who have “pets:read:sold” are limited to see only pets with status “Sold”.    For this API I used the ASP.NET Core Resource-Based authorization to determine whether the current user can search pets with particular statuses. I made the  PetsAuthorizationHandler  type that receives of object of PetsSearchQuery  as resource context and changed it according to user effective permissions
+
+###  Connect to external API (https://petstore.swagger.io/)
+•	As a data source of  pets for my store, I decided to used data from public API  https://petstore.swagger.io/ in order to use this API  from my code I generated  the strongly typed C# API client  by NSwag CLI  utility https://github.com/RicoSuter/NSwag and  OpenAPI schema downloaded by this link https://petstore.swagger.io/v2/swagger.json. In result I got the strongly typed client that I can include in my project and use from the code.
+
+### Configure project to allow to Validate access tokens issued by Authorization Server 
+•	I set all  Auth section  properties in  appsetting.json with values taken from Auth0  Application and API
+ 
+
+### Run application and demonstrate main use cases
+•	As anonymous user call GET /api/petstore.  Got 200 OK.
+•	As anonymous user call protected POST /api/petstore/pets/search. Got 401 Unauthorized.
+•	As authenticated as manager@mail.com call  POST /api/petstore/pets/search with { Statues : [ ‘Available’, ‘Sold’ ] } got response with TotalCount > 8k
+•	As authenticated as employee@mail.com call POST /api/petstore/pets/search with { Statues : [ ‘Available’, ‘Sold’ ] } got response with TotalCount < 100
+
