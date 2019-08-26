@@ -1,0 +1,358 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Assessment1</name>
+    </assembly>
+    <members>
+        <member name="T:Assessment1.Authorization.PetsAuthorizationHandler">
+            <summary>
+             This class contains logic for determining whether PetsAuthorizationRequirement in authorization
+             policies are satisfied or not 
+             </summary>
+        </member>
+        <member name="M:Assessment1.Controllers.PetstoreDataController.GetStoreInfo">
+            <summary>
+            Returns the information about the current pets store 
+            </summary>
+            <remarks>
+            Non authorized users can call this API method.
+            </remarks>
+            <returns>An information about current store</returns>
+        </member>
+        <member name="M:Assessment1.Controllers.PetstoreDataController.SearchPets(Assessment1.Models.SearchPetsQuery)">
+            <summary>
+            Searches for pets in the current pet store matching a given search query.
+            </summary>
+            <remarks>
+            Only authorized users can call this API method. Also authorization rules will be applied automatically on a passed search query object.
+            </remarks>
+            <param name="query">Pets search query</param>
+            <returns>search result</returns>
+        </member>
+        <member name="M:Assessment1.Models.ArrayExtensions.IsNullOrEmpty(System.Array)">
+            <summary>Indicates whether the specified array is null or has a length of zero.</summary>
+            <param name="array">The array to test.</param>
+            <returns>true if the array parameter is null or has a length of zero; otherwise, false.</returns>
+        </member>
+        <member name="T:Assessment1.Models.AuthOptions">
+            <summary>
+            Represents all the options you can use to configure OAuth authorization flows.
+            </summary> 
+        </member>
+        <member name="P:Assessment1.Models.AuthOptions.Domain">
+            <summary>
+            Authority (url to authorization server)
+            </summary>
+        </member>
+        <member name="P:Assessment1.Models.AuthOptions.ApiIdentifier">
+            <summary>
+             Audience refers to the Resource Servers that should accept the token
+            </summary>
+        </member>
+        <member name="T:Assessment1.Models.MappingProfile">
+            <summary>
+            represents automapper mapping profile 
+            </summary>
+        </member>
+        <member name="T:Assessment1.Models.Pet">
+            <summary>
+            Represents a pet in a pet store
+            </summary>
+        </member>
+        <member name="T:Assessment1.Models.SearchPetsQuery">
+            <summary>
+            Represents a query to search pets in pest store with given parameters 
+            </summary>
+        </member>
+        <member name="P:Assessment1.Models.SearchPetsQuery.Statuses">
+            <summary>
+            Search pets by multiple statuses
+            </summary>
+        </member>
+        <member name="T:Assessment1.Models.SearchPetsResult">
+            <summary>
+            Represents a pets search query result 
+            </summary>
+        </member>
+        <member name="T:Assessment1.Models.StoreInfo">
+            <summary>
+            Represents a pet store information
+            </summary>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.AddPetAsync(Assessment1.Nswag.Pet)">
+            <summary>Add a new pet to the store</summary>
+            <param name="body">Pet object that needs to be added to the store</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.AddPetAsync(Assessment1.Nswag.Pet,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Add a new pet to the store</summary>
+            <param name="body">Pet object that needs to be added to the store</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.UpdatePetAsync(Assessment1.Nswag.Pet)">
+            <summary>Update an existing pet</summary>
+            <param name="body">Pet object that needs to be added to the store</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.UpdatePetAsync(Assessment1.Nswag.Pet,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Update an existing pet</summary>
+            <param name="body">Pet object that needs to be added to the store</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.FindPetsByStatusAsync(System.Collections.Generic.IEnumerable{Assessment1.Nswag.Anonymous})">
+            <summary>Finds Pets by status</summary>
+            <param name="status">Status values that need to be considered for filter</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.FindPetsByStatusAsync(System.Collections.Generic.IEnumerable{Assessment1.Nswag.Anonymous},System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Finds Pets by status</summary>
+            <param name="status">Status values that need to be considered for filter</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.FindPetsByTagsAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>Finds Pets by tags</summary>
+            <param name="tags">Tags to filter by</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.FindPetsByTagsAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Finds Pets by tags</summary>
+            <param name="tags">Tags to filter by</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.GetPetByIdAsync(System.Int64)">
+            <summary>Find pet by ID</summary>
+            <param name="petId">ID of pet to return</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.GetPetByIdAsync(System.Int64,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Find pet by ID</summary>
+            <param name="petId">ID of pet to return</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.UpdatePetWithFormAsync(System.Int64,System.String,System.String)">
+            <summary>Updates a pet in the store with form data</summary>
+            <param name="petId">ID of pet that needs to be updated</param>
+            <param name="name">Updated name of the pet</param>
+            <param name="status">Updated status of the pet</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.UpdatePetWithFormAsync(System.Int64,System.String,System.String,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Updates a pet in the store with form data</summary>
+            <param name="petId">ID of pet that needs to be updated</param>
+            <param name="name">Updated name of the pet</param>
+            <param name="status">Updated status of the pet</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.DeletePetAsync(System.String,System.Int64)">
+            <summary>Deletes a pet</summary>
+            <param name="petId">Pet id to delete</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.DeletePetAsync(System.String,System.Int64,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Deletes a pet</summary>
+            <param name="petId">Pet id to delete</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.UploadFileAsync(System.Int64,System.String,Assessment1.Nswag.FileParameter)">
+            <summary>uploads an image</summary>
+            <param name="petId">ID of pet to update</param>
+            <param name="additionalMetadata">Additional data to pass to server</param>
+            <param name="file">file to upload</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.UploadFileAsync(System.Int64,System.String,Assessment1.Nswag.FileParameter,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>uploads an image</summary>
+            <param name="petId">ID of pet to update</param>
+            <param name="additionalMetadata">Additional data to pass to server</param>
+            <param name="file">file to upload</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.GetInventoryAsync">
+            <summary>Returns pet inventories by status</summary>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.GetInventoryAsync(System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Returns pet inventories by status</summary>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.PlaceOrderAsync(Assessment1.Nswag.Order)">
+            <summary>Place an order for a pet</summary>
+            <param name="body">order placed for purchasing the pet</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.PlaceOrderAsync(Assessment1.Nswag.Order,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Place an order for a pet</summary>
+            <param name="body">order placed for purchasing the pet</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.GetOrderByIdAsync(System.Int64)">
+            <summary>Find purchase order by ID</summary>
+            <param name="orderId">ID of pet that needs to be fetched</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.GetOrderByIdAsync(System.Int64,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Find purchase order by ID</summary>
+            <param name="orderId">ID of pet that needs to be fetched</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.DeleteOrderAsync(System.Int64)">
+            <summary>Delete purchase order by ID</summary>
+            <param name="orderId">ID of the order that needs to be deleted</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.DeleteOrderAsync(System.Int64,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Delete purchase order by ID</summary>
+            <param name="orderId">ID of the order that needs to be deleted</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.CreateUserAsync(Assessment1.Nswag.User)">
+            <summary>Create user</summary>
+            <param name="body">Created user object</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.CreateUserAsync(Assessment1.Nswag.User,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Create user</summary>
+            <param name="body">Created user object</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.CreateUsersWithArrayInputAsync(System.Collections.Generic.IEnumerable{Assessment1.Nswag.User})">
+            <summary>Creates list of users with given input array</summary>
+            <param name="body">List of user object</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.CreateUsersWithArrayInputAsync(System.Collections.Generic.IEnumerable{Assessment1.Nswag.User},System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Creates list of users with given input array</summary>
+            <param name="body">List of user object</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.CreateUsersWithListInputAsync(System.Collections.Generic.IEnumerable{Assessment1.Nswag.User})">
+            <summary>Creates list of users with given input array</summary>
+            <param name="body">List of user object</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.CreateUsersWithListInputAsync(System.Collections.Generic.IEnumerable{Assessment1.Nswag.User},System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Creates list of users with given input array</summary>
+            <param name="body">List of user object</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.LoginUserAsync(System.String,System.String)">
+            <summary>Logs user into the system</summary>
+            <param name="username">The user name for login</param>
+            <param name="password">The password for login in clear text</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.LoginUserAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Logs user into the system</summary>
+            <param name="username">The user name for login</param>
+            <param name="password">The password for login in clear text</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.LogoutUserAsync">
+            <summary>Logs out current logged in user session</summary>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.LogoutUserAsync(System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Logs out current logged in user session</summary>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.GetUserByNameAsync(System.String)">
+            <summary>Get user by user name</summary>
+            <param name="username">The name that needs to be fetched. Use user1 for testing.</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.GetUserByNameAsync(System.String,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Get user by user name</summary>
+            <param name="username">The name that needs to be fetched. Use user1 for testing.</param>
+            <returns>successful operation</returns>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.UpdateUserAsync(System.String,Assessment1.Nswag.User)">
+            <summary>Updated user</summary>
+            <param name="username">name that need to be updated</param>
+            <param name="body">Updated user object</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.UpdateUserAsync(System.String,Assessment1.Nswag.User,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Updated user</summary>
+            <param name="username">name that need to be updated</param>
+            <param name="body">Updated user object</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.DeleteUserAsync(System.String)">
+            <summary>Delete user</summary>
+            <param name="username">The name that needs to be deleted</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:Assessment1.Nswag.PetstoreClient.DeleteUserAsync(System.String,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Delete user</summary>
+            <param name="username">The name that needs to be deleted</param>
+            <exception cref="T:Assessment1.Nswag.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="P:Assessment1.Nswag.Order.Status">
+            <summary>Order Status</summary>
+        </member>
+        <member name="P:Assessment1.Nswag.User.UserStatus">
+            <summary>User Status</summary>
+        </member>
+        <member name="P:Assessment1.Nswag.Pet.Status">
+            <summary>pet status in the store</summary>
+        </member>
+        <member name="T:Assessment1.Services.IPetsSearchService">
+            <summary>
+            Represents the abstraction that is being used for search pets in store
+            </summary>
+        </member>
+        <member name="M:Assessment1.Services.IPetsSearchService.SearchPetsAsync(Assessment1.Models.SearchPetsQuery)">
+            <summary>
+            Search pets in store by given query
+            </summary>
+            <param name="query">search criteria</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
