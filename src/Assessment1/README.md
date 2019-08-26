@@ -71,8 +71,8 @@ The users who have permission `pets:read:any` are allowed to search pets with an
 ```
 
 ### Run the application and demonstrated the main use cases
-•	As anonymous user call GET /api/petstore.  Got 200 OK.
-•	As anonymous user call protected POST /api/petstore/pets/search. Got 401 Unauthorized.
-•	As authenticated as manager@mail.com call  POST /api/petstore/pets/search with { Statues : [ ‘Available’, ‘Sold’ ] } got response with TotalCount > 8k
-•	As authenticated as employee@mail.com call POST /api/petstore/pets/search with { Statues : [ ‘Available’, ‘Sold’ ] } got response with TotalCount < 100
+- As anonymous user call GET /api/petstore.  Got 200 OK.
+- As anonymous user call protected POST /api/petstore/pets/search. Got 401 Unauthorized.
+- As authenticated as manager@mail.com call  POST /api/petstore/pets/search with { Statues : [ ‘Available’, ‘Sold’ ] } got response with TotalCount > 8k
+- As authenticated as employee@mail.com call POST /api/petstore/pets/search with { Statues : [ ‘Available’, ‘Sold’ ] } got response with TotalCount < 100
 
