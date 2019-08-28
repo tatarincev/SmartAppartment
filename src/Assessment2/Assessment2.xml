@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Assessment2</name>
+    </assembly>
+    <members>
+        <member name="T:Assessment2.Models.AuthOptions">
+            <summary>
+            Represents all the options you can use to configure OAuth authorization flows.
+            </summary> 
+        </member>
+        <member name="P:Assessment2.Models.AuthOptions.Domain">
+            <summary>
+            Authority (url to authorization server)
+            </summary>
+        </member>
+        <member name="P:Assessment2.Models.AuthOptions.ApiIdentifier">
+            <summary>
+             Audience refers to the Resource Servers that should accept the token
+            </summary>
+        </member>
+        <member name="P:Assessment2.Models.Index.IndexModel.DocType">
+            <summary>
+            Represents a type of document in search index, supported values: company || property
+            </summary>
+        </member>
+        <member name="T:Assessment2.Models.IPagedDataSource`1">
+            <summary>
+            Interface for implementing a data source iterator
+            </summary>
+        </member>
+        <member name="P:Assessment2.Models.IPagedDataSource`1.CurrentPageNumber">
+            <summary>
+            The number of the page that will returned by <see cref = "!:Fetch" />
+            </summary>
+        </member>
+        <member name="P:Assessment2.Models.IPagedDataSource`1.PageSize">
+            <summary>
+            The number of records in the page
+            </summary>
+        </member>
+        <member name="M:Assessment2.Models.IPagedDataSource`1.FetchNextPage">
+            <summary>
+            Gets the data page from the source according to currently set <see cref = "P:Assessment2.Models.IPagedDataSource`1.CurrentPageNumber" /> and <see cref = "P:Assessment2.Models.IPagedDataSource`1.PageSize" />.
+            Implementations should increment <see cref="P:Assessment2.Models.IPagedDataSource`1.CurrentPageNumber"/> after fetch.
+            </summary>
+            <returns>Is some data received</returns>
+        </member>
+        <member name="T:Assessment2.Models.MappingProfile">
+            <summary>
+            represents automapper mapping profile 
+            </summary>
+        </member>
+    </members>
+</doc>
