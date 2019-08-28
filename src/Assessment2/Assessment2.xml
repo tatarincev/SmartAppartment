@@ -4,6 +4,11 @@
         <name>Assessment2</name>
     </assembly>
     <members>
+        <member name="M:Assessment2.Models.ArrayExtensions.IsNullOrEmpty(System.Array)">
+            <summary>Indicates whether the specified array is null or has a length of zero.</summary>
+            <param name="array">The array to test.</param>
+            <returns>true if the array parameter is null or has a length of zero; otherwise, false.</returns>
+        </member>
         <member name="T:Assessment2.Models.AuthOptions">
             <summary>
             Represents all the options you can use to configure OAuth authorization flows.
@@ -19,7 +24,17 @@
              Audience refers to the Resource Servers that should accept the token
             </summary>
         </member>
-        <member name="P:Assessment2.Models.Index.IndexModel.DocType">
+        <member name="P:Assessment2.Models.IndexedSearchQuery.Phrase">
+            <summary>
+            Search phrase
+            </summary>
+        </member>
+        <member name="P:Assessment2.Models.IndexedSearchQuery.DocType">
+            <summary>
+            Represents a type of document in search index, supported values: company || property
+            </summary>
+        </member>
+        <member name="P:Assessment2.Models.Index.IndexDocument.DocType">
             <summary>
             Represents a type of document in search index, supported values: company || property
             </summary>

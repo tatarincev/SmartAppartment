@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using Assessment2.Middleware;
 using Assessment2.Models;
 using Assessment2.Services;
 using AutoMapper;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace Assessment2
@@ -27,7 +29,23 @@ namespace Assessment2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                 .AddJsonOptions(options =>
+                 {                    
+                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                     options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                     options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
+                     options.SerializerSettings.Formatting = Formatting.None;
+
+                     options.SerializerSettings.Error += (sender, args) =>
+                     {
+                         // Expose any JSON serialization exception as HTTP error
+                         throw new JsonException(args.ErrorContext.Error.Message);
+                     };
+                 }
+            )
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.Configure<AuthOptions>(Configuration.GetSection("Auth0"));
             services.Configure<AzureSearchOptions>(Configuration.GetSection("AzureSearch"));
@@ -93,6 +111,7 @@ namespace Assessment2
             services.AddAuthorization();
 
             services.AddTransient<IIndexer, AzureSearchIndexer>();
+            services.AddTransient<IIndexedSearchService, AzureSearchService>();
 
             //Discover the assembly and  register all mapping profiles through reflection
             services.AddAutoMapper(typeof(Startup));
@@ -112,6 +131,8 @@ namespace Assessment2
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            //Return all errors as Json response
+            app.UseMiddleware<ApiErrorWrappingMiddleware>();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

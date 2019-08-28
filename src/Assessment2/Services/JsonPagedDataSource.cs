@@ -8,13 +8,13 @@ using Newtonsoft.Json;
 
 namespace Assessment2.Services
 {
-    public class JsonFileSystemPagedDataSource<TItem> : IPagedDataSource<TItem>, IDisposable     
+    public class JsonPagedDataSource<TItem> : IPagedDataSource<TItem>, IDisposable     
     {
         private readonly StreamReader _streamReader;
         private readonly JsonTextReader _jsonTextReader;
         private readonly JsonSerializer _serializer;
 
-        public JsonFileSystemPagedDataSource(Stream stream)
+        public JsonPagedDataSource(Stream stream)
         {
             _streamReader = new StreamReader(stream);
             _jsonTextReader = new JsonTextReader(_streamReader);

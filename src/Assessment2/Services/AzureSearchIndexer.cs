@@ -6,6 +6,7 @@ using System.Threading;
 using Assessment2.Models;
 using Assessment2.Models.Index;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Search;
 using Microsoft.Azure.Search.Models;
 using Microsoft.Extensions.Options;
@@ -22,41 +23,37 @@ namespace Assessment2.Services
             _mapper = mapper;
         }
 
-        public void DoIndex<TDataItem>(string indexName, Stream stream, Action<string> progressCallback, CancellationToken cancellationToken)
-        {
-            if (indexName == null)
-            {
-                throw new ArgumentNullException(nameof(indexName));
-            }
+        public void DoIndex<TDataItem>(Stream stream, Action<string> progressCallback, CancellationToken cancellationToken)
+        {          
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
             }
 
-            var client = CreateSearchServiceClient(_options);
-            if (!client.Indexes.Exists(indexName))
+            var client = new SearchServiceClient(_options.SearchServiceName, new SearchCredentials(_options.SearchServiceAdminApiKey));
+            if (!client.Indexes.Exists(_options.IndexName))
             {
                 var definition = new Index()
                 {
-                    Name = indexName,
-                    Fields = FieldBuilder.BuildForType<IndexModel>()
+                    Name = _options.IndexName,
+                    Fields = FieldBuilder.BuildForType<IndexDocument>()
                 };
                 client.Indexes.Create(definition);
             }
 
-            var indexClient = client.Indexes.GetClient(indexName);
-            using (var jsonDataSource = new JsonFileSystemPagedDataSource<TDataItem>(stream))
+            var indexClient = client.Indexes.GetClient(_options.IndexName);
+            using (var jsonDataSource = new JsonPagedDataSource<TDataItem>(stream))
             {
                 var indexedDocCount = 0;
                 IEnumerable<TDataItem> dataItems;
                 do
                 {
                     dataItems = jsonDataSource.FetchNextPage();
-                    var indexActions = new List<IndexAction<IndexModel>>();
+                    var indexActions = new List<IndexAction<IndexDocument>>();
                     foreach (var dataItem in dataItems)
                     {
-                        var indexModel = _mapper.Map<IndexModel>(dataItem);
-                        indexActions.Add(new IndexAction<IndexModel>(indexModel));
+                        var indexModel = _mapper.Map<IndexDocument>(dataItem);
+                        indexActions.Add(new IndexAction<IndexDocument>(indexModel));
                     }
 
                     cancellationToken.ThrowIfCancellationRequested();
@@ -83,14 +80,6 @@ namespace Assessment2.Services
             }
         }
 
-        private static SearchServiceClient CreateSearchServiceClient(AzureSearchOptions options)
-        {
-            if(options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-            var serviceClient = new SearchServiceClient(options.SearchServiceName, new SearchCredentials(options.SearchServiceAdminApiKey));
-            return serviceClient;
-        }
+   
     }
 }

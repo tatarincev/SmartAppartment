@@ -3,7 +3,7 @@ using Microsoft.Spatial;
 
 namespace Assessment2.Models.Index
 {
-    public class IndexModel
+    public class IndexDocument
     {
         [System.ComponentModel.DataAnnotations.Key]
         [IsFilterable]
@@ -24,7 +24,7 @@ namespace Assessment2.Models.Index
         [IsFilterable]
         public string State { get; set; }
 
-        [IsFilterable]
+        [IsFilterable, IsFacetable]
         public string Market { get; set; }
 
         [IsSearchable]
