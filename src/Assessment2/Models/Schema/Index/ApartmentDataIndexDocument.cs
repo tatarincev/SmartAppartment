@@ -1,24 +1,30 @@
 using Microsoft.Azure.Search;
+using Microsoft.Azure.Search.Models;
 using Microsoft.Spatial;
 
-namespace Assessment2.Models.Index
+namespace Assessment2.Models.Schema.Index
 {
-    public class IndexDocument
+    /// <summary>
+    /// Represents index schema for apartment data 
+    /// </summary>
+    public class ApartmentDataIndexDocument
     {
         [System.ComponentModel.DataAnnotations.Key]
         [IsFilterable]
         public string Id { get; set; }
 
         /// <summary>
-        /// Represents a type of document in search index, supported values: company || property
+        /// Represents a type of apartment data in search index
         /// </summary>
         [IsSortable, IsFilterable]
-        public string DocType { get; set; }
+        public string DataType { get; set; }
 
         [IsSearchable, IsSortable]
+        [Analyzer(AnalyzerName.AsString.EnMicrosoft)]
         public string Name { get; set; }
 
         [IsSearchable]
+        [Analyzer(AnalyzerName.AsString.EnMicrosoft)]
         public string FormerName { get; set; }
 
         [IsFilterable]
@@ -36,5 +42,10 @@ namespace Assessment2.Models.Index
         [IsFilterable, IsSortable]
         public GeographyPoint Location { get; set; }
 
+
+        public override string ToString()
+        {         
+           return $"{Name} {City} ({State})";
+        }
     }
 }

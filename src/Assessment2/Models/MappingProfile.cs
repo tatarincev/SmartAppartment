@@ -1,4 +1,5 @@
-using Assessment2.Models.Index;
+using Assessment2.Models.Schema.Index;
+using Assessment2.Models.Schema.Json;
 using AutoMapper;
 using Microsoft.Spatial;
 
@@ -11,13 +12,12 @@ namespace Assessment2.Models
     {
         public MappingProfile()
         {
-            CreateMap<RealProperty, IndexDocument>()
+            CreateMap<RealProperty, ApartmentDataIndexDocument>()
                     .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.PropertyID))
-                    .ForMember(dest => dest.Location, opt => opt.MapFrom(src => GeographyPoint.Create((double)src.Lat, (double)src.Lng)))
-                    .ForMember(dest => dest.DocType, opt => opt.MapFrom(src=> "property"));
-            CreateMap<ManagementCompany, IndexDocument>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.MgmtID))
-                .ForMember(dest => dest.DocType, opt => opt.MapFrom(src => "company"));
+                    .ForMember(dest => dest.Location, opt => opt.MapFrom(src => GeographyPoint.Create((double)src.Lat, (double)src.Lng)));
+            CreateMap<MgmntCompany, ApartmentDataIndexDocument>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.MgmtID));
+            CreateMap<ApartmentDataIndexDocument, ApartmentDataSearchEntry>();
         }
     }
 }

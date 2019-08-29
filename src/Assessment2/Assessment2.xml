@@ -4,10 +4,91 @@
         <name>Assessment2</name>
     </assembly>
     <members>
+        <member name="M:Assessment2.Controllers.IndexSearchDataController.UploadAndIndexJson(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Uploads a JSON file and add automatically run an indexation task that will add to an index all documents from this file
+            </summary>
+            <param name="file">json file</param>
+            <returns></returns>
+        </member>
+        <member name="M:Assessment2.Controllers.IndexSearchDataController.Search(Assessment2.Models.IndexedSearchQuery)">
+            <summary>
+            Searches an apartment data in an index.
+            </summary>
+            <param name="query">Search term</param>
+            <returns>List of documents  are matched to passed search query</returns>
+        </member>
+        <member name="M:Assessment2.Controllers.IndexSearchDataController.Suggest(System.String,System.String[])">
+            <summary>
+            Suggestions for passed term.
+            </summary>
+            <param name="phrase">Search term</param>
+            <param name="markets">It acts as the scope for the search. When ‘market’ is passed in, results should only be returned which match the markets (scope).</param>
+            <returns>List of suggested text from matching documents</returns>
+        </member>
+        <member name="M:Assessment2.Controllers.IndexSearchDataController.AutoComplete(System.String,System.String[])">
+            <summary>
+            Auto completes the entered term by data from index.  
+            </summary>
+            <param name="phrase">Search term</param>
+            <param name="markets">It acts as the scope for the search. When ‘market’ is passed in, results should only be returned which match the markets (scope).</param>
+            <returns>The result of this operation is a list of suggested terms or phrases depending on the mode.</returns>
+        </member>
+        <member name="M:Assessment2.Controllers.IndexSearchDataController.FindAllMarkets">
+            <summary>
+            List of all markets
+            </summary>
+            <returns>List of all markets that present in an index.</returns>
+        </member>
         <member name="M:Assessment2.Models.ArrayExtensions.IsNullOrEmpty(System.Array)">
             <summary>Indicates whether the specified array is null or has a length of zero.</summary>
             <param name="array">The array to test.</param>
             <returns>true if the array parameter is null or has a length of zero; otherwise, false.</returns>
+        </member>
+        <member name="T:Assessment2.Models.ApartmentDataSearchEntry">
+            <summary>
+            Represents a search result item for an apartment data search request
+            </summary>
+        </member>
+        <member name="P:Assessment2.Models.ApartmentDataSearchEntry.Score">
+            <summary>
+            Computed relevance rank 
+            </summary>
+        </member>
+        <member name="T:Assessment2.Models.IndexedSearchQuery">
+            <summary>
+            Represents a query to search for apartment data in an index.
+            </summary>
+        </member>
+        <member name="P:Assessment2.Models.IndexedSearchQuery.Phrase">
+            <summary>
+            Search phrase
+            </summary>
+        </member>
+        <member name="P:Assessment2.Models.IndexedSearchQuery.DataType">
+            <summary>
+            Specify  a concrete apartment data type for filter search results 
+            </summary>
+        </member>
+        <member name="T:Assessment2.Models.AppartmentDataSearchResult">
+            <summary>
+            Represents a result of search for apartment data in an index  performed by <see cref = "T:Assessment2.Models.IndexedSearchQuery" />
+            </summary>
+        </member>
+        <member name="F:Assessment2.Models.ApartmentDataType.Property">
+            <summary>
+            Real Estate property
+            </summary>
+        </member>
+        <member name="F:Assessment2.Models.ApartmentDataType.ManagementCompany">
+            <summary>
+            Apartment management company
+            </summary>
+        </member>
+        <member name="F:Assessment2.Models.ApartmentDataType.Director">
+            <summary>
+            Director of an apartment management company
+            </summary>
         </member>
         <member name="T:Assessment2.Models.AuthOptions">
             <summary>
@@ -24,46 +105,71 @@
              Audience refers to the Resource Servers that should accept the token
             </summary>
         </member>
-        <member name="P:Assessment2.Models.IndexedSearchQuery.Phrase">
+        <member name="T:Assessment2.Models.AzureSearchOptions">
             <summary>
-            Search phrase
+            Options for configuring indexed search using Azure Search.
             </summary>
-        </member>
-        <member name="P:Assessment2.Models.IndexedSearchQuery.DocType">
-            <summary>
-            Represents a type of document in search index, supported values: company || property
-            </summary>
-        </member>
-        <member name="P:Assessment2.Models.Index.IndexDocument.DocType">
-            <summary>
-            Represents a type of document in search index, supported values: company || property
-            </summary>
-        </member>
-        <member name="T:Assessment2.Models.IPagedDataSource`1">
-            <summary>
-            Interface for implementing a data source iterator
-            </summary>
-        </member>
-        <member name="P:Assessment2.Models.IPagedDataSource`1.CurrentPageNumber">
-            <summary>
-            The number of the page that will returned by <see cref = "!:Fetch" />
-            </summary>
-        </member>
-        <member name="P:Assessment2.Models.IPagedDataSource`1.PageSize">
-            <summary>
-            The number of records in the page
-            </summary>
-        </member>
-        <member name="M:Assessment2.Models.IPagedDataSource`1.FetchNextPage">
-            <summary>
-            Gets the data page from the source according to currently set <see cref = "P:Assessment2.Models.IPagedDataSource`1.CurrentPageNumber" /> and <see cref = "P:Assessment2.Models.IPagedDataSource`1.PageSize" />.
-            Implementations should increment <see cref="P:Assessment2.Models.IPagedDataSource`1.CurrentPageNumber"/> after fetch.
-            </summary>
-            <returns>Is some data received</returns>
         </member>
         <member name="T:Assessment2.Models.MappingProfile">
             <summary>
             represents automapper mapping profile 
+            </summary>
+        </member>
+        <member name="T:Assessment2.Models.Schema.Index.ApartmentDataIndexDocument">
+            <summary>
+            Represents index schema for apartment data 
+            </summary>
+        </member>
+        <member name="P:Assessment2.Models.Schema.Index.ApartmentDataIndexDocument.DataType">
+            <summary>
+            Represents a type of apartment data in search index
+            </summary>
+        </member>
+        <member name="T:Assessment2.Models.Schema.Json.ApartmentDataJsonDocument">
+            <summary>
+            Represents a base class for json documents that can be used as a data source for an index
+            </summary>
+        </member>
+        <member name="T:Assessment2.Models.Schema.Json.MgmntCompany">
+            <summary>
+            Represents the json schema for the apartment management companies
+            </summary>
+        </member>
+        <member name="T:Assessment2.Models.Schema.Json.RealProperty">
+            <summary>
+            Represents the json schema for the real property objects
+            </summary>
+        </member>
+        <member name="T:Assessment2.Services.IIndexedSearchService">
+            <summary>
+            Provides an abstraction for searching apartment data in an indexed store
+            </summary>
+        </member>
+        <member name="T:Assessment2.Services.IPagedDataSource`1">
+            <summary>
+            Interface for implementing a data source iterator
+            </summary>
+        </member>
+        <member name="P:Assessment2.Services.IPagedDataSource`1.CurrentPageNumber">
+            <summary>
+            The number of the page that will returned by <see cref = "M:Assessment2.Services.IPagedDataSource`1.FetchNextPage" />
+            </summary>
+        </member>
+        <member name="P:Assessment2.Services.IPagedDataSource`1.PageSize">
+            <summary>
+            The number of records in the page
+            </summary>
+        </member>
+        <member name="M:Assessment2.Services.IPagedDataSource`1.FetchNextPage">
+            <summary>
+            Gets the data page from the source according to currently set <see cref = "P:Assessment2.Services.IPagedDataSource`1.CurrentPageNumber" /> and <see cref = "P:Assessment2.Services.IPagedDataSource`1.PageSize" />.
+            Implementations must increment <see cref="P:Assessment2.Services.IPagedDataSource`1.CurrentPageNumber"/> after fetch.
+            </summary>
+            <returns>Is some data received</returns>
+        </member>
+        <member name="T:Assessment2.Services.ISearchIndexer">
+            <summary>
+            Provides an abstraction for indexing  apartment data in an index
             </summary>
         </member>
     </members>

@@ -1,5 +1,8 @@
 namespace Assessment2.Models
 {
+    /// <summary>
+    /// Represents a query to search for apartment data in an index.
+    /// </summary>
     public class IndexedSearchQuery
     {
         /// <summary>
@@ -7,11 +10,11 @@ namespace Assessment2.Models
         /// </summary>
         public string Phrase { get; set; } = "*";
         /// <summary>
-        /// Represents a type of document in search index, supported values: company || property
+        /// Specify  a concrete apartment data type for filter search results 
         /// </summary>
-        public string DocType { get; set; }
+        public ApartmentDataType? DataType { get; set; }
         public string[] Markets { get; set; }
         public int Top { get; set; } = 25;
-        public string OrderBy { get; set; }
+        public string OrderBy { get; set; } = nameof(ApartmentDataSearchEntry.Name);
     }
 }

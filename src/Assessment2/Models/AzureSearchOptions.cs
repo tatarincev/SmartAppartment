@@ -1,5 +1,8 @@
 namespace Assessment2.Models
 {
+    /// <summary>
+    /// Options for configuring indexed search using Azure Search.
+    /// </summary>
     public class AzureSearchOptions
     {
         public string IndexName { get; set; } = "smart-search-index";

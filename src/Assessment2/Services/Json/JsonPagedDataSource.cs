@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using Assessment2.JsonConverters;
-using Assessment2.Models;
+using Assessment2.Models.Schema.Json;
 using Newtonsoft.Json;
 
-namespace Assessment2.Services
+namespace Assessment2.Services.Json
 {
     public class JsonPagedDataSource<TItem> : IPagedDataSource<TItem>, IDisposable     
     {

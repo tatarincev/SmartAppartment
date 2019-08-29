@@ -4,16 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using Assessment2.Models;
-using Assessment2.Models.Index;
+using Assessment2.Models.Schema.Index;
+using Assessment2.Services.Json;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Search;
 using Microsoft.Azure.Search.Models;
 using Microsoft.Extensions.Options;
 
-namespace Assessment2.Services
+namespace Assessment2.Services.Azure
 {
-    public class AzureSearchIndexer : IIndexer
+    public class AzureSearchIndexer : ISearchIndexer
     {
         private readonly AzureSearchOptions _options;
         private readonly IMapper _mapper;
@@ -33,11 +33,7 @@ namespace Assessment2.Services
             var client = new SearchServiceClient(_options.SearchServiceName, new SearchCredentials(_options.SearchServiceAdminApiKey));
             if (!client.Indexes.Exists(_options.IndexName))
             {
-                var definition = new Index()
-                {
-                    Name = _options.IndexName,
-                    Fields = FieldBuilder.BuildForType<IndexDocument>()
-                };
+                var definition = CreateIndexDefinition(_options.IndexName);
                 client.Indexes.Create(definition);
             }
 
@@ -49,11 +45,11 @@ namespace Assessment2.Services
                 do
                 {
                     dataItems = jsonDataSource.FetchNextPage();
-                    var indexActions = new List<IndexAction<IndexDocument>>();
+                    var indexActions = new List<IndexAction<ApartmentDataIndexDocument>>();
                     foreach (var dataItem in dataItems)
                     {
-                        var indexModel = _mapper.Map<IndexDocument>(dataItem);
-                        indexActions.Add(new IndexAction<IndexDocument>(indexModel));
+                        var indexModel = _mapper.Map<ApartmentDataIndexDocument>(dataItem);
+                        indexActions.Add(new IndexAction<ApartmentDataIndexDocument>(indexModel));
                     }
 
                     cancellationToken.ThrowIfCancellationRequested();
@@ -80,6 +76,35 @@ namespace Assessment2.Services
             }
         }
 
-   
+        private static Index CreateIndexDefinition(string indexName)
+        {
+            var result = new Index()
+            {
+                Name = indexName,
+                Fields = FieldBuilder.BuildForType<ApartmentDataIndexDocument>(),
+                ScoringProfiles = new[]
+                 {
+                     new ScoringProfile
+                     {
+                          Name = "names",
+                           TextWeights = new TextWeights
+                           {
+                               Weights = new Dictionary<string, double>
+                               {
+                                   { nameof(ApartmentDataIndexDocument.Name), 3.0 },
+                                   { nameof(ApartmentDataIndexDocument.FormerName), 3.0 }
+                               }
+                           }
+                     }
+                 },
+                Suggesters = new[]
+                {
+                    new Suggester("sg", nameof(ApartmentDataIndexDocument.Name), nameof(ApartmentDataIndexDocument.City), nameof(ApartmentDataIndexDocument.State))
+                },
+                DefaultScoringProfile = "names"
+            };
+            return result;
+        }
+
     }
 }

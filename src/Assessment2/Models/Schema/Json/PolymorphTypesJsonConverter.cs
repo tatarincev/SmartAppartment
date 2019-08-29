@@ -1,14 +1,13 @@
 using System;
 using System.Linq;
-using Assessment2.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Assessment2.JsonConverters
+namespace Assessment2.Models.Schema.Json
 {
     public class PolymorphTypesJsonConverter : JsonConverter
     {
-        private static readonly Type[] _knowTypes = { typeof(ApartmentData) };
+        private static readonly Type[] _knowTypes = { typeof(ApartmentDataJsonDocument) };
 
         public override bool CanWrite => false;
         public override bool CanRead => true;
@@ -29,7 +28,7 @@ namespace Assessment2.JsonConverters
             }
             else if(obj["mgmtID"] != null)
             {
-                result = new ManagementCompany();
+                result = new MgmntCompany();
             }
             if(result == null)
             {
