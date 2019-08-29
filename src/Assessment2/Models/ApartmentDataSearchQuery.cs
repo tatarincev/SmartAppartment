@@ -15,6 +15,6 @@ namespace Assessment2.Models
         public ApartmentDataType? DataType { get; set; }
         public string[] Markets { get; set; }
         public int Top { get; set; } = 25;
-        public string OrderBy { get; set; } = nameof(ApartmentDataSearchEntry.Name);
+        public string OrderBy { get; set; }
     }
 }

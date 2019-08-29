@@ -28,15 +28,18 @@ namespace Assessment2.Models.Schema.Index
         public string FormerName { get; set; }
 
         [IsFilterable]
+        [Analyzer(AnalyzerName.AsString.EnMicrosoft)]
         public string State { get; set; }
 
         [IsFilterable, IsFacetable]
         public string Market { get; set; }
 
         [IsSearchable]
+        [Analyzer(AnalyzerName.AsString.EnMicrosoft)]
         public string StreetAddress { get; set; }
 
         [IsSearchable, IsSortable]
+        [Analyzer(AnalyzerName.AsString.EnMicrosoft)]
         public string City { get; set; }
 
         [IsFilterable, IsSortable]
@@ -45,7 +48,7 @@ namespace Assessment2.Models.Schema.Index
 
         public override string ToString()
         {         
-           return $"{Name} {City} ({State})";
+           return $"{Name}, {City} ({State})";
         }
     }
 }

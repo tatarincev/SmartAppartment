@@ -17,6 +17,7 @@ namespace Assessment2.Models
         public string Market { get; set; }
         public string StreetAddress { get; set; }
         public string City { get; set; }
+        public string State { get; set; }
 
         /// <summary>
         /// Computed relevance rank 

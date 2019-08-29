@@ -31,16 +31,7 @@ namespace Assessment2.Services.Azure
             var result = new AppartmentDataSearchResult();
 
             var parameters = new SearchParameters
-            {
-                Select = new[] {
-                        nameof(ApartmentDataIndexDocument.Id),
-                        nameof(ApartmentDataIndexDocument.Name),
-                        nameof(ApartmentDataIndexDocument.FormerName),
-                        nameof(ApartmentDataIndexDocument.City),
-                        nameof(ApartmentDataIndexDocument.State),
-                        nameof(ApartmentDataIndexDocument.StreetAddress),
-                        nameof(ApartmentDataIndexDocument.DataType)
-                },
+            {              
                 Top = query.Top,
                 IncludeTotalResultCount = true
             };

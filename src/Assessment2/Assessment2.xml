@@ -169,7 +169,7 @@
         </member>
         <member name="T:Assessment2.Services.ISearchIndexer">
             <summary>
-            Provides an abstraction for indexing  apartment data in an index
+            Provides an abstraction for add apartment data to an index
             </summary>
         </member>
     </members>

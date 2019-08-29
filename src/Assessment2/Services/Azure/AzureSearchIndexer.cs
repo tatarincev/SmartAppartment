@@ -99,7 +99,10 @@ namespace Assessment2.Services.Azure
                  },
                 Suggesters = new[]
                 {
-                    new Suggester("sg", nameof(ApartmentDataIndexDocument.Name), nameof(ApartmentDataIndexDocument.City), nameof(ApartmentDataIndexDocument.State))
+                    new Suggester("sg", nameof(ApartmentDataIndexDocument.Name)
+                                      , nameof(ApartmentDataIndexDocument.FormerName)
+                                      , nameof(ApartmentDataIndexDocument.StreetAddress)
+                                      , nameof(ApartmentDataIndexDocument.City) )
                 },
                 DefaultScoringProfile = "names"
             };
