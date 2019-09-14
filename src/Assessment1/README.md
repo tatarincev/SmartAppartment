@@ -8,7 +8,6 @@ And implements the following functional requirements:
 ## Requirements
 
 * .[NET Core 2.2 SDK](https://www.microsoft.com/net/download/core)
-
 ## To run this project
 1. Ensure that you have replaced the [appsettings.json](appsettings.json) file with the values for your Auth0 account.
 ```JSON
