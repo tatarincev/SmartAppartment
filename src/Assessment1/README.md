@@ -17,6 +17,7 @@ And implements the following functional requirements:
     "ClientId": "{CLIENT_ID}"
 ```
 
+
 2. Run the application from the command line:
 
     ```bash
