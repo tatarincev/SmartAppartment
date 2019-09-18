@@ -5,6 +5,7 @@ namespace Assessment2.Models
     /// </summary>
     public class IndexedSearchQuery
     {
+
         /// <summary>
         /// Search phrase
         /// </summary>
